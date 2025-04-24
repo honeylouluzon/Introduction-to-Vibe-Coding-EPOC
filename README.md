@@ -23,10 +23,12 @@ Consciousness Foundry is a sandbox simulation where you design and evolve artifi
 ## Core Mechanics
 
 ### Module Types
-- **Vision Sensor**: Processes visual information
-- **Memory Bank**: Stores and retrieves information
-- **Neural Layer**: Processes information and makes decisions
-- **Emotion Simulator**: Adds emotional responses to stimuli
+- **Sensory Integrator**: Acts as a signal sender, initiating the flow of information.
+- **Vision Sensor**: Processes visual information and sends it to connected modules.
+- **Memory Bank**: Stores and retrieves information for use in decision-making.
+- **Neural Layer**: Processes information and makes decisions based on inputs.
+- **Emotion Simulator**: Adds emotional responses to stimuli, enhancing AI behavior.
+- **Decision Engine**: Serves as a signal receiver, executing actions based on processed information.
 
 ### Neural Connections
 Modules automatically connect to nearby modules, forming a neural network. The connections visualize the flow of information between different cognitive components.
