@@ -293,6 +293,40 @@ function drawSimulation() {
     });
 }
 
+function renderConnectionCircles() {
+    const processingSpeed = gameState.parameters.processing;
+    const memorySize = gameState.parameters.memory;
+
+    gameState.connections.forEach(connection => {
+        const { source, target } = connection;
+        const speedFactor = processingSpeed / 100; // Adjust speed based on processing speed
+        const circleCount = Math.ceil(memorySize / 20); // Adjust count based on memory size
+
+        for (let i = 0; i < circleCount; i++) {
+            const offset = i / circleCount;
+            const progress = (gameState.simulationTime * speedFactor + offset) % 1;
+
+            const circleX = source.x + (target.x - source.x) * progress;
+            const circleY = source.y + (target.y - source.y) * progress;
+
+            // Draw the white circle
+            ctx.beginPath();
+            ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+    });
+}
+
+// Call this function within the main render loop
+function render() {
+    // ...existing rendering logic...
+
+    renderConnectionCircles();
+
+    // ...existing rendering logic...
+}
+
 // Metrics Chart
 const metricsData = {
     labels: [],
