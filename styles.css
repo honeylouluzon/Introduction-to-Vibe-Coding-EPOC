@@ -43,12 +43,21 @@ h1 {
     text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
 }
 
+.csci-score-container {
+    grid-column: 1 / span 3; /* Span across the full width of the workspace */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .consciousness-score {
-    font-size: 1.5rem;
+    display: inline-block;
     padding: 10px 20px;
     background: var(--panel-color);
     border-radius: 8px;
     border: 1px solid var(--primary-color);
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
 }
 
 .workspace {
