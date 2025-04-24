@@ -109,7 +109,7 @@
         </main>
     </div>
 
-    <div id="module-popup" class="module-popup" style="display: none; position: absolute; z-index: 2000;">
+    <div id="module-popup" class="module-popup" style="display: none; position: absolute; z-index: 1000;">
         <div class="popup-content">
             <span class="close" onclick="closeModulePopup()">&times;</span>
             <h3 id="popup-title">Module Title</h3>
@@ -124,7 +124,7 @@ function showModulePopup(title, description) {
     document.getElementById('popup-description').innerText = description;
 
     // Set a fixed position for the popup
-    popup.style.top = '200px'; // Example fixed position
+    popup.style.top = '500px'; // Example fixed position
     popup.style.left = '50%';
     popup.style.transform = 'translateX(-50%)';
 
