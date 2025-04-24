@@ -39,7 +39,7 @@
                         </div>
                     </div>
                     <div class="modules">
-                        <h3>Modules <span class="info-icon" onclick="showModuleInfo()">...</span></h3>
+                        <h3>Modules</h3>
                         <div class="module-grid">
                             <div class="module" draggable="true" data-module="vision">Vision Sensor</div>
                             <div class="module" draggable="true" data-module="memory">Memory Bank</div>
@@ -109,26 +109,6 @@
         </main>
     </div>
 
-    <!-- Popup Modal for Module Info -->
-    <div id="module-info-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModuleInfo()">&times;</span>
-            <h3>Module Information</h3>
-            <p id="module-info-text">Select a module to see its definition and function.</p>
-        </div>
-    </div>
-
     <script src="game.js"></script>
-    <script>
-    function showModuleInfo() {
-        const modal = document.getElementById('module-info-modal');
-        modal.style.display = 'block';
-    }
-
-    function closeModuleInfo() {
-        const modal = document.getElementById('module-info-modal');
-        modal.style.display = 'none';
-    }
-    </script>
 </body>
 </html>
