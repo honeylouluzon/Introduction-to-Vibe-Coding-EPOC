@@ -15,6 +15,7 @@
 
         <main>
             <div class="workspace">
+                <!-- CSCI Score moved here -->
                 <div class="csci-score-container">
                     <div class="consciousness-score">
                         <span>CSCI Score: </span>
@@ -42,6 +43,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Other sections remain unchanged -->
             </div>
         </main>
     </div>
@@ -53,6 +55,39 @@
             <p id="popup-description">Module Description</p>
         </div>
     </div>
+
+    <script>
+    function showModulePopup(title, description) {
+        const popup = document.getElementById('module-popup');
+        document.getElementById('popup-title').innerText = title;
+        document.getElementById('popup-description').innerText = description;
+        // Set a fixed position for the popup
+        popup.style.top = '700px'; // Example fixed position
+        popup.style.left = '50%';
+        popup.style.transform = 'translateX(-50%)';
+
+        popup.style.display = 'block';
+    }
+
+    function closeModulePopup() {
+        const popup = document.getElementById('module-popup');
+        popup.style.display = 'none';
+    }
+    </script>
+
+    <script>
+    // Update the onclick handlers for modules to pass the event object
+    const modules = document.querySelectorAll('.module');
+    modules.forEach(module => {
+        module.onclick = function(event) {
+            showModulePopup(
+                module.getAttribute('data-module-title'),
+                module.getAttribute('data-module-description'),
+                event
+            );
+        };
+    });
+    </script>
 
     <script src="game.js"></script>
 </body>
