@@ -125,7 +125,7 @@ function showModulePopup(title, description, event) {
 
     // Adjust the position of the popup relative to the clicked module
     const rect = event.target.getBoundingClientRect();
-    popup.style.top = `${rect.bottom + window.scrollY + 10}px`;
+    popup.style.top = `${rect.bottom + window.scrollY + 50}px`;
     popup.style.left = `${rect.left + window.scrollX}px`;
 
     popup.style.display = 'block';
