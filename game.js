@@ -832,56 +832,6 @@ function randomStart() {
 // Add Random Start button event listener
 document.getElementById('random-start').addEventListener('click', randomStart);
 
-// Add functions to save and load module configurations
-function saveConfiguration() {
-    const configuration = {
-        modules: gameState.modules.map(module => ({
-            type: module.type,
-            x: module.x,
-            y: module.y,
-            connections: module.connections.map(conn => gameState.modules.indexOf(conn))
-        })),
-        parameters: gameState.parameters
-    };
-    localStorage.setItem('simulationConfig', JSON.stringify(configuration));
-    alert('Configuration saved successfully!');
-}
-
-function loadConfiguration() {
-    const configString = localStorage.getItem('simulationConfig');
-    if (!configString) {
-        alert('No saved configuration found!');
-        return;
-    }
-
-    const configuration = JSON.parse(configString);
-    resetSimulation();
-
-    configuration.modules.forEach(moduleData => {
-        const module = {
-            type: moduleData.type,
-            x: moduleData.x,
-            y: moduleData.y,
-            connections: []
-        };
-        gameState.modules.push(module);
-    });
-
-    configuration.modules.forEach((moduleData, index) => {
-        moduleData.connections.forEach(connIndex => {
-            gameState.modules[index].connections.push(gameState.modules[connIndex]);
-        });
-    });
-
-    Object.assign(gameState.parameters, configuration.parameters);
-    drawSimulation();
-    alert('Configuration loaded successfully!');
-}
-
-// Add event listeners for save and load buttons
-document.getElementById('save-config').addEventListener('click', saveConfiguration);
-document.getElementById('load-config').addEventListener('click', loadConfiguration);
-
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
