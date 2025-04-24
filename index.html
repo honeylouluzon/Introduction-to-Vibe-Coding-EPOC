@@ -118,15 +118,15 @@
     </div>
 
     <script>
-function showModulePopup(title, description, event) {
+function showModulePopup(title, description) {
     const popup = document.getElementById('module-popup');
     document.getElementById('popup-title').innerText = title;
     document.getElementById('popup-description').innerText = description;
 
-    // Adjust the position of the popup relative to the clicked module
-    const rect = event.target.getBoundingClientRect();
-    popup.style.top = `${rect.bottom + window.scrollY + 50}px`;
-    popup.style.center = `${rect.center + window.scrollX}px`;
+    // Set a fixed position for the popup
+    popup.style.top = '200px'; // Example fixed position
+    popup.style.left = '50%';
+    popup.style.transform = 'translateX(-50%)';
 
     popup.style.display = 'block';
 }
