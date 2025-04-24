@@ -188,18 +188,48 @@ function updateSimulation() {
         const baseState = Math.sin(gameState.simulationTime * 0.05) * 0.5 + 0.5;
         module.state = baseState * (gameState.parameters.processing / 100);
     });
-    
+
     // Calculate CSI Score
     updateCSIScore();
-    
+
     // Update connection strength
     updateConnectionStrength();
-    
+
     // Update consciousness level
     updateConsciousnessLevel();
-    
+
     // Update narrative
     updateNarrative();
+
+    // Adjust white circle behavior dynamically
+    const processingSpeed = gameState.parameters.processing;
+    const memorySize = gameState.parameters.memory;
+    const complexitySize = gameState.parameters.complexity;
+
+    gameState.modules.forEach(module => {
+        module.connections.forEach(target => {
+            // Adjust speed of white circles
+            const speedFactor = processingSpeed / 100;
+            const progress = (gameState.simulationTime * speedFactor % 100) / 100;
+
+            // Adjust count of white circles
+            const circleCount = Math.ceil(memorySize / 20); // Example: 5 circles for memory size 100
+
+            // Adjust complexity of connections
+            const connectionCount = Math.ceil(complexitySize / 20); // Example: 5 connections for complexity 100
+
+            for (let i = 0; i < circleCount; i++) {
+                const offset = i / circleCount;
+                const circleX = module.x + (target.x - module.x) * (progress + offset) % 1;
+                const circleY = module.y + (target.y - module.y) * (progress + offset) % 1;
+
+                ctx.beginPath();
+                ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+        });
+    });
 }
 
 function updateCSIScore() {
@@ -241,16 +271,6 @@ function drawSimulation() {
             ctx.strokeStyle = 'rgba(107, 70, 193, 0.8)';
             ctx.lineWidth = 2;
             ctx.stroke();
-
-            // Draw animated white circles
-            const progress = (gameState.simulationTime % 100) / 100; // Progress from 0 to 1
-            const circleX = module.x + (target.x - module.x) * progress;
-            const circleY = module.y + (target.y - module.y) * progress;
-
-            ctx.beginPath();
-            ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
-            ctx.fillStyle = 'white';
-            ctx.fill();
         });
     });
 
