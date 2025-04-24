@@ -41,15 +41,15 @@
                     <div class="modules">
                         <h3>Modules</h3>
                         <div class="module-grid">
-                            <div class="module" draggable="true" data-module="vision" onclick="showModulePopup('Vision Sensor', 'Processes visual information')">Vision Sensor</div>
-                            <div class="module" draggable="true" data-module="memory" onclick="showModulePopup('Memory Bank', 'Stores and retrieves information')">Memory Bank</div>
-                            <div class="module" draggable="true" data-module="processor" onclick="showModulePopup('Neural Layer', 'Processes information and makes decisions')">Neural Layer</div>
-                            <div class="module" draggable="true" data-module="emotion" onclick="showModulePopup('Emotion Simulator', 'Adds emotional responses to stimuli')">Emotion Simulator</div>
-                            <div class="module" draggable="true" data-module="attention" onclick="showModulePopup('Attention Filter', 'Filters relevant information for processing')">Attention Filter</div>
-                            <div class="module" draggable="true" data-module="language" onclick="showModulePopup('Language Processor', 'Processes and generates language')">Language Processor</div>
-                            <div class="module" draggable="true" data-module="motor" onclick="showModulePopup('Motor Controller', 'Controls movement and actions')">Motor Controller</div>
-                            <div class="module" draggable="true" data-module="sensory" onclick="showModulePopup('Sensory Integrator', 'Integrates sensory inputs')">Sensory Integrator</div>
-                            <div class="module" draggable="true" data-module="decision" onclick="showModulePopup('Decision Engine', 'Makes decisions based on inputs')">Decision Engine</div>
+                            <div class="module" draggable="true" data-module="vision" data-module-title="Vision Sensor" data-module-description="Processes visual information">Vision Sensor</div>
+                            <div class="module" draggable="true" data-module="memory" data-module-title="Memory Bank" data-module-description="Stores and retrieves information">Memory Bank</div>
+                            <div class="module" draggable="true" data-module="processor" data-module-title="Neural Layer" data-module-description="Processes information and makes decisions">Neural Layer</div>
+                            <div class="module" draggable="true" data-module="emotion" data-module-title="Emotion Simulator" data-module-description="Adds emotional responses to stimuli">Emotion Simulator</div>
+                            <div class="module" draggable="true" data-module="attention" data-module-title="Attention Filter" data-module-description="Filters relevant information for processing">Attention Filter</div>
+                            <div class="module" draggable="true" data-module="language" data-module-title="Language Processor" data-module-description="Processes and generates language">Language Processor</div>
+                            <div class="module" draggable="true" data-module="motor" data-module-title="Motor Controller" data-module-description="Controls movement and actions">Motor Controller</div>
+                            <div class="module" draggable="true" data-module="sensory" data-module-title="Sensory Integrator" data-module-description="Integrates sensory inputs">Sensory Integrator</div>
+                            <div class="module" draggable="true" data-module="decision" data-module-title="Decision Engine" data-module-description="Makes decisions based on inputs">Decision Engine</div>
                         </div>
                     </div>
                 </div>
@@ -118,10 +118,16 @@
     </div>
 
     <script>
-function showModulePopup(title, description) {
+function showModulePopup(title, description, event) {
     const popup = document.getElementById('module-popup');
     document.getElementById('popup-title').innerText = title;
     document.getElementById('popup-description').innerText = description;
+
+    // Adjust the position of the popup relative to the clicked module
+    const rect = event.target.getBoundingClientRect();
+    popup.style.top = `${rect.bottom + window.scrollY + 10}px`;
+    popup.style.left = `${rect.left + window.scrollX}px`;
+
     popup.style.display = 'block';
 }
 
@@ -129,6 +135,20 @@ function closeModulePopup() {
     const popup = document.getElementById('module-popup');
     popup.style.display = 'none';
 }
+</script>
+
+<script>
+// Update the onclick handlers for modules to pass the event object
+const modules = document.querySelectorAll('.module');
+modules.forEach(module => {
+    module.onclick = function(event) {
+        showModulePopup(
+            module.getAttribute('data-module-title'),
+            module.getAttribute('data-module-description'),
+            event
+        );
+    };
+});
 </script>
 
     <script src="game.js"></script>
