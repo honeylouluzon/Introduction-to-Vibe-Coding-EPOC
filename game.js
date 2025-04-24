@@ -215,13 +215,11 @@ function updateSimulation() {
             // Adjust count of white circles
             const circleCount = Math.ceil(memorySize / 20); // Example: 5 circles for memory size 100
 
-            // Adjust complexity of connections
-            const connectionCount = Math.ceil(complexitySize / 20); // Example: 5 connections for complexity 100
-
             for (let i = 0; i < circleCount; i++) {
                 const offset = i / circleCount;
-                const circleX = module.x + (target.x - module.x) * (progress + offset) % 1;
-                const circleY = module.y + (target.y - module.y) * (progress + offset) % 1;
+                const adjustedProgress = (progress + offset) % 1; // Ensure progress stays within bounds
+                const circleX = module.x + (target.x - module.x) * adjustedProgress;
+                const circleY = module.y + (target.y - module.y) * adjustedProgress;
 
                 ctx.beginPath();
                 ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
