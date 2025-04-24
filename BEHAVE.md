@@ -1,9 +1,10 @@
 # BEHAVE
 <!--
-1. Add additional task at TASK.md with series # followed by [TODO] before puting the instruction of your task
-(Example: 1. [TODO] perform the BEHAVE.MD)
-2. Write a prompt in the github copilot instructing to perform the BEHAVE.md followed by the number of task at the TASK.md that you want to perform
-(Sample Prompt: "Execute the BEHAVE.md. ChosenTask = 1")
+Pre-BEHAVE.md Steps:  
+STEP 1. Add additional task at TASK.md with series # followed by [TODO] before puting the instruction of your task  
+(Example: 1. [TODO] Execute the content of the BEHAVE.MD)  
+Step 2. Write a prompt in the github copilot instructing to perform the BEHAVE.md followed by the number of task at the TASK.md that you want to perform  
+(Sample Prompt: "Execute the BEHAVE.md. ChosenTask = 1")  
 -->
 **Instruction**: Perform all the steps one by one from STEP 1 to STEP 4
 
