@@ -99,38 +99,61 @@ canvas.addEventListener('drop', (e) => {
     addModule(moduleType, x, y);
 });
 
-// Module Management
+// Add module classification and connection dataset
+const moduleClassification = {
+    sensory: 'sender',
+    vision: 'processor',
+    memory: 'processor',
+    decision: 'receiver',
+    emotion: 'processor',
+    attention: 'processor',
+    language: 'processor',
+    motor: 'processor'
+};
+
+const connectionRules = {
+    sensory: ['vision', 'memory'],
+    vision: ['memory'],
+    memory: ['decision'],
+    decision: []
+};
+
+// Modify addModule to classify modules
 function addModule(type, x, y) {
     const module = {
         type,
         x,
         y,
         connections: [],
-        state: 0
+        state: 0,
+        role: moduleClassification[type] || 'processor'
     };
-    
-    // Connect to nearest module if there are other modules
+
+    // Connect to nearest allowed module
     if (gameState.modules.length > 0) {
         let nearestModule = null;
         let minDistance = Infinity;
-        
+
         gameState.modules.forEach(existingModule => {
             const distance = Math.sqrt(
                 Math.pow(existingModule.x - x, 2) + 
                 Math.pow(existingModule.y - y, 2)
             );
-            if (distance < minDistance) {
+            if (
+                distance < minDistance &&
+                connectionRules[module.type]?.includes(existingModule.type)
+            ) {
                 minDistance = distance;
                 nearestModule = existingModule;
             }
         });
-        
-        if (minDistance < 200) { // Only connect if within reasonable distance
+
+        if (nearestModule) {
             module.connections.push(nearestModule);
             nearestModule.connections.push(module);
         }
     }
-    
+
     gameState.modules.push(module);
     drawSimulation();
 }
@@ -204,74 +227,48 @@ function updateCSIScore() {
 // Drawing Functions
 function drawSimulation() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw background grid first
+
+    // Draw background grid
     drawGrid();
-    
-    // If no modules and not simulating, we can return since grid is drawn
-    if (gameState.modules.length === 0 && !gameState.isSimulating) {
-        return;
-    }
-    
-    // Draw connections with glow effect
+
+    // Draw connections with animated white circles
     gameState.modules.forEach(module => {
         module.connections.forEach(target => {
-            // Draw glow
+            // Draw connection line
             ctx.beginPath();
             ctx.moveTo(module.x, module.y);
             ctx.lineTo(target.x, target.y);
-            ctx.strokeStyle = `rgba(0, 255, 157, ${module.state * 0.3})`;
-            ctx.lineWidth = 6;
-            ctx.stroke();
-            
-            // Draw main line
-            ctx.beginPath();
-            ctx.moveTo(module.x, module.y);
-            ctx.lineTo(target.x, target.y);
-            ctx.strokeStyle = `rgba(107, 70, 193, ${module.state})`;
+            ctx.strokeStyle = 'rgba(107, 70, 193, 0.8)';
             ctx.lineWidth = 2;
             ctx.stroke();
+
+            // Draw animated white circles
+            const progress = (gameState.simulationTime % 100) / 100; // Progress from 0 to 1
+            const circleX = module.x + (target.x - module.x) * progress;
+            const circleY = module.y + (target.y - module.y) * progress;
+
+            ctx.beginPath();
+            ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
         });
     });
-    
-    // Draw modules with glow effect
+
+    // Draw modules
     gameState.modules.forEach(module => {
-        // Draw glow
-        ctx.beginPath();
-        ctx.arc(module.x, module.y, 22, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 157, ${module.state * 0.3})`;
-        ctx.fill();
-        
-        // Draw main circle
         ctx.beginPath();
         ctx.arc(module.x, module.y, 20, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 255, 157, ${module.state})`;
+        ctx.fillStyle = 'rgba(0, 255, 157, 0.8)';
         ctx.fill();
         ctx.strokeStyle = '#6b46c1';
         ctx.lineWidth = 2;
         ctx.stroke();
-        
-        // Draw module label with background
-        const label = module.type;
+
+        // Draw module label
+        ctx.fillStyle = '#e2e8f0';
         ctx.font = '12px Arial';
         ctx.textAlign = 'center';
-        
-        // Draw text background
-        const textMetrics = ctx.measureText(label);
-        const textWidth = textMetrics.width + 10;
-        const textHeight = 20;
-        
-        ctx.fillStyle = 'rgba(45, 55, 72, 0.9)';
-        ctx.fillRect(
-            module.x - textWidth/2,
-            module.y + 25,
-            textWidth,
-            textHeight
-        );
-        
-        // Draw text
-        ctx.fillStyle = '#e2e8f0';
-        ctx.fillText(label, module.x, module.y + 40);
+        ctx.fillText(module.type, module.x, module.y + 30);
     });
 }
 
@@ -786,4 +783,4 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeCanvas();
     updateAIFeedback();
     setInterval(updateAIFeedback, 5000);
-}); 
+});
