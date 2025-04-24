@@ -29,6 +29,9 @@ Consciousness Foundry is a sandbox simulation where you design and evolve artifi
 - **Neural Layer**: Processes information and makes decisions based on inputs.
 - **Emotion Simulator**: Adds emotional responses to stimuli, enhancing AI behavior.
 - **Decision Engine**: Serves as a signal receiver, executing actions based on processed information.
+- **Auditory Sensor**: Captures and processes sound signals for further analysis.
+- **Motor Controller**: Converts decisions into physical actions or outputs.
+- **Logic Processor**: Handles logical operations and complex decision-making.
 
 ### Neural Connections
 Modules automatically connect to nearby modules, forming a neural network. The connections visualize the flow of information between different cognitive components.
