@@ -86,6 +86,7 @@ input[type="range"] {
     background: var(--background-color);
     border-radius: 4px;
     outline: none;
+    appearance: none; /* Added standard property for compatibility */
     -webkit-appearance: none;
 }
 
@@ -349,9 +350,9 @@ button:hover {
     color: var(--success-color);
 }
 
-.module-popup {
+#module-popup {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 50px); /* Adjusted to make it slightly lower */
     left: 50%;
     transform: translate(-50%, -50%);
     background: var(--panel-color);

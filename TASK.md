@@ -4,3 +4,4 @@
 3. [DONE] Remove the 3 dot next to the module section title.
 4. [DONE] The pop up of definition and function of the chosen module will appear in module section covering the whole section when you click the module using mouse or tap the module using the touchscreen.
 5. [DONE] The pop up didn't appear at the top of the modules, it instead appear at the most buttom of the page. Please transfer it near the module, it may be like a pop up box that cover the screen or atleast next to module section that you could close anytime.
+6. [DONE] Nice one. The Pop Up decribed in task 5 is really implemented. But can you just change a little bit the possition? make it a little lower just in the place where the module buttons is located.
