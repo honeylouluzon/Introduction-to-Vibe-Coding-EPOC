@@ -41,15 +41,15 @@
                     <div class="modules">
                         <h3>Modules</h3>
                         <div class="module-grid">
-                            <div class="module" draggable="true" data-module="vision">Vision Sensor</div>
-                            <div class="module" draggable="true" data-module="memory">Memory Bank</div>
-                            <div class="module" draggable="true" data-module="processor">Neural Layer</div>
-                            <div class="module" draggable="true" data-module="emotion">Emotion Simulator</div>
-                            <div class="module" draggable="true" data-module="attention">Attention Filter</div>
-                            <div class="module" draggable="true" data-module="language">Language Processor</div>
-                            <div class="module" draggable="true" data-module="motor">Motor Controller</div>
-                            <div class="module" draggable="true" data-module="sensory">Sensory Integrator</div>
-                            <div class="module" draggable="true" data-module="decision">Decision Engine</div>
+                            <div class="module" draggable="true" data-module="vision" onclick="showModulePopup('Vision Sensor', 'Processes visual information')">Vision Sensor</div>
+                            <div class="module" draggable="true" data-module="memory" onclick="showModulePopup('Memory Bank', 'Stores and retrieves information')">Memory Bank</div>
+                            <div class="module" draggable="true" data-module="processor" onclick="showModulePopup('Neural Layer', 'Processes information and makes decisions')">Neural Layer</div>
+                            <div class="module" draggable="true" data-module="emotion" onclick="showModulePopup('Emotion Simulator', 'Adds emotional responses to stimuli')">Emotion Simulator</div>
+                            <div class="module" draggable="true" data-module="attention" onclick="showModulePopup('Attention Filter', 'Filters relevant information for processing')">Attention Filter</div>
+                            <div class="module" draggable="true" data-module="language" onclick="showModulePopup('Language Processor', 'Processes and generates language')">Language Processor</div>
+                            <div class="module" draggable="true" data-module="motor" onclick="showModulePopup('Motor Controller', 'Controls movement and actions')">Motor Controller</div>
+                            <div class="module" draggable="true" data-module="sensory" onclick="showModulePopup('Sensory Integrator', 'Integrates sensory inputs')">Sensory Integrator</div>
+                            <div class="module" draggable="true" data-module="decision" onclick="showModulePopup('Decision Engine', 'Makes decisions based on inputs')">Decision Engine</div>
                         </div>
                     </div>
                 </div>
@@ -108,6 +108,28 @@
             </div>
         </main>
     </div>
+
+    <div id="module-popup" class="module-popup" style="display: none;">
+        <div class="popup-content">
+            <span class="close" onclick="closeModulePopup()">&times;</span>
+            <h3 id="popup-title">Module Title</h3>
+            <p id="popup-description">Module Description</p>
+        </div>
+    </div>
+
+    <script>
+function showModulePopup(title, description) {
+    const popup = document.getElementById('module-popup');
+    document.getElementById('popup-title').innerText = title;
+    document.getElementById('popup-description').innerText = description;
+    popup.style.display = 'block';
+}
+
+function closeModulePopup() {
+    const popup = document.getElementById('module-popup');
+    popup.style.display = 'none';
+}
+</script>
 
     <script src="game.js"></script>
 </body>
