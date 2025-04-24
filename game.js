@@ -67,6 +67,34 @@ function drawGrid() {
     ctx.fillText('Drag modules here to begin', canvas.width / 2, canvas.height / 2);
 }
 
+// Modify parameter controls to dynamically update simulation
+function updateSimulationParameters() {
+    const processingSpeed = gameState.parameters.processing;
+    const memorySize = gameState.parameters.memory;
+    const complexitySize = gameState.parameters.complexity;
+
+    // Adjust white circle behavior dynamically
+    gameState.modules.forEach(module => {
+        module.connections.forEach(target => {
+            const speedFactor = processingSpeed / 100;
+            const progress = (gameState.simulationTime * speedFactor % 100) / 100;
+            const circleCount = Math.ceil(memorySize / 20);
+
+            for (let i = 0; i < circleCount; i++) {
+                const offset = i / circleCount;
+                const adjustedProgress = (progress + offset) % 1;
+                const circleX = module.x + (target.x - module.x) * adjustedProgress;
+                const circleY = module.y + (target.y - module.y) * adjustedProgress;
+
+                ctx.beginPath();
+                ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
+                ctx.fillStyle = 'white';
+                ctx.fill();
+            }
+        });
+    });
+}
+
 // Parameter Controls
 document.querySelectorAll('input[type="range"]').forEach(input => {
     input.addEventListener('input', (e) => {
@@ -75,6 +103,9 @@ document.querySelectorAll('input[type="range"]').forEach(input => {
         gameState.parameters[parameter] = parseInt(value);
         e.target.nextElementSibling.textContent = value;
         updateCSIScore();
+        if (gameState.isSimulating) {
+            updateSimulationParameters();
+        }
     });
 });
 
@@ -200,34 +231,6 @@ function updateSimulation() {
 
     // Update narrative
     updateNarrative();
-
-    // Adjust white circle behavior dynamically
-    const processingSpeed = gameState.parameters.processing;
-    const memorySize = gameState.parameters.memory;
-    const complexitySize = gameState.parameters.complexity;
-
-    gameState.modules.forEach(module => {
-        module.connections.forEach(target => {
-            // Adjust speed of white circles
-            const speedFactor = processingSpeed / 100;
-            const progress = (gameState.simulationTime * speedFactor % 100) / 100;
-
-            // Adjust count of white circles
-            const circleCount = Math.ceil(memorySize / 20); // Example: 5 circles for memory size 100
-
-            for (let i = 0; i < circleCount; i++) {
-                const offset = i / circleCount;
-                const adjustedProgress = (progress + offset) % 1; // Ensure progress stays within bounds
-                const circleX = module.x + (target.x - module.x) * adjustedProgress;
-                const circleY = module.y + (target.y - module.y) * adjustedProgress;
-
-                ctx.beginPath();
-                ctx.arc(circleX, circleY, 5, 0, Math.PI * 2);
-                ctx.fillStyle = 'white';
-                ctx.fill();
-            }
-        });
-    });
 }
 
 function updateCSIScore() {
