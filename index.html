@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consciousness Foundry</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <header>
+            <h1>Consciousness Foundry</h1>
+            <div class="consciousness-score">
+                <span>CSCI Score: </span>
+                <span id="csi-score">0.00</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="workspace">
+                <div class="design-panel">
+                    <h2>AI Design</h2>
+                    <div class="parameter-controls">
+                        <div class="parameter">
+                            <label for="memory">Memory (A(t))</label>
+                            <input type="range" id="memory" min="0" max="100" value="50">
+                            <span class="value">50</span>
+                        </div>
+                        <div class="parameter">
+                            <label for="processing">Processing Speed (D(t))</label>
+                            <input type="range" id="processing" min="0" max="100" value="50">
+                            <span class="value">50</span>
+                        </div>
+                        <div class="parameter">
+                            <label for="complexity">Complexity (S(t))</label>
+                            <input type="range" id="complexity" min="0" max="100" value="50">
+                            <span class="value">50</span>
+                        </div>
+                    </div>
+                    <div class="modules">
+                        <h3>Modules</h3>
+                        <div class="module-grid">
+                            <div class="module" draggable="true" data-module="vision">Vision Sensor</div>
+                            <div class="module" draggable="true" data-module="memory">Memory Bank</div>
+                            <div class="module" draggable="true" data-module="processor">Neural Layer</div>
+                            <div class="module" draggable="true" data-module="emotion">Emotion Simulator</div>
+                            <div class="module" draggable="true" data-module="attention">Attention Filter</div>
+                            <div class="module" draggable="true" data-module="language">Language Processor</div>
+                            <div class="module" draggable="true" data-module="motor">Motor Controller</div>
+                            <div class="module" draggable="true" data-module="sensory">Sensory Integrator</div>
+                            <div class="module" draggable="true" data-module="decision">Decision Engine</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="simulation-view">
+                    <h2>Simulation</h2>
+                    <canvas id="simulation-canvas"></canvas>
+                    <div class="simulation-controls">
+                        <button id="random-start">Random Start</button>
+                        <button id="run-simulation">Run Simulation</button>
+                        <button id="reset-simulation">Reset</button>
+                    </div>
+                </div>
+
+                <div class="analysis-panel">
+                    <h2>Analysis</h2>
+                    <div class="metrics">
+                        <canvas id="metrics-chart"></canvas>
+                    </div>
+                    <div class="connection-strength">
+                        <h3>Connection Strength</h3>
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strength-bar"></div>
+                            <div class="strength-label" id="strength-label">0%</div>
+                        </div>
+                    </div>
+                    <div class="consciousness-level">
+                        <h3>Consciousness Level</h3>
+                        <div class="level-indicator">
+                            <div class="level-bar" id="level-bar"></div>
+                            <div class="level-label" id="level-label">Basic</div>
+                        </div>
+                    </div>
+                    <div class="narrative-panel">
+                        <h3>AI Experience Log</h3>
+                        <div class="narrative-container">
+                            <div id="narrative-text" class="narrative-text"></div>
+                            <div id="narrative-events" class="narrative-events"></div>
+                        </div>
+                        <div class="narrative-stats">
+                            <div class="stat">
+                                <span>Experiences:</span>
+                                <span id="experience-count">0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Interactions:</span>
+                                <span id="interaction-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ai-feedback">
+                        <h3>AI Assistant Feedback</h3>
+                        <div id="ai-feedback-text"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html> 
