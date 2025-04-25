@@ -11,4 +11,4 @@ Step 2. Write a prompt in the github copilot instructing to perform the BEHAVE.m
 **STEP 1**: Update the status of the Task #<ChosenTask> of TASK.md from [TODO] to [PROCESSING]  
 **STEP 2**: Execute the Instructions under the Task #<ChosenTask> of TASK.md  
 **STEP 3**: Update the status of Task #<ChosenTask> in TASK.md from [PROCESSING] TO [DONE]  
-**STEP 4**: Run git add . && git commit with -m as the changes or action taken or the Task #<ChosenTask> of TASK.md instruction to sync the Changes to the Github Repository.
+**STEP 4**: Run git add . && git commit with -m as the changes or action taken or the Task && git push #<ChosenTask> of TASK.md instruction to sync the Changes to the Github Repository.
