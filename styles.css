@@ -47,6 +47,7 @@ h1 {
     grid-column: 1 / span 3; /* Span across the full width of the workspace */
     text-align: center;
     margin-bottom: 20px;
+    width: 100%; /* Ensure it matches the width of other sections */
 }
 
 .consciousness-score {
