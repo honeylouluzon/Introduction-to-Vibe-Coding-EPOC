@@ -1,4 +1,4 @@
-// Update simulator behavior
+// Update simulator behavior dynamically based on slider changes
 function updateSimulatorBehavior(processingSpeed, memorySize, complexity) {
     const whiteCircles = document.querySelectorAll('.white-circle');
     whiteCircles.forEach(circle => {
@@ -13,6 +13,13 @@ function updateSimulatorBehavior(processingSpeed, memorySize, complexity) {
     const modules = document.querySelectorAll('.module');
     modules.forEach(module => {
         module.dataset.complexity = complexity;
+    });
+
+    // Adjust connections based on complexity
+    const allModules = document.querySelectorAll('.module');
+    allModules.forEach(module => {
+        const connections = Math.min(complexity, allModules.length - 1);
+        module.dataset.connections = connections;
     });
 }
 
