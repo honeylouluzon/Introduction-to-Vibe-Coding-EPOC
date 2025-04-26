@@ -18,3 +18,31 @@ function updateSimulatorBehavior(processingSpeed, memorySize, complexity) {
 
 // Example usage
 updateSimulatorBehavior(2, 5, 3);
+
+// Update simulator behavior dynamically based on slider changes
+document.getElementById('memory').addEventListener('input', (event) => {
+    const memorySize = event.target.value;
+    updateSimulatorBehavior(
+        document.getElementById('processing').value,
+        memorySize,
+        document.getElementById('complexity').value
+    );
+});
+
+document.getElementById('processing').addEventListener('input', (event) => {
+    const processingSpeed = event.target.value;
+    updateSimulatorBehavior(
+        processingSpeed,
+        document.getElementById('memory').value,
+        document.getElementById('complexity').value
+    );
+});
+
+document.getElementById('complexity').addEventListener('input', (event) => {
+    const complexity = event.target.value;
+    updateSimulatorBehavior(
+        document.getElementById('processing').value,
+        document.getElementById('memory').value,
+        complexity
+    );
+});
